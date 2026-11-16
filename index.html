@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Lumora Candles – Light Up Your Moments</title>
+    <meta name="description"
+        content="Lumora Candles: handcrafted scented candles in 13 fragrances. Where fragrance meets feeling.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;900&family=Cormorant+Garamond:wght@500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --iv: #F5F0E7;
+            --be: #E9DCCB;
+            --es: #24170F;
+            --go: #B58A45;
+            color-scheme: light;
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px)
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 70px
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: var(--iv);
+            color: var(--es);
+            font: 400 16px/1.6 Archivo, system-ui, sans-serif;
+            overflow-x: hidden;
+            background-color: #F5F0E7
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0 0 auto;
+            height: env(safe-area-inset-top, 0px);
+            background: var(--iv);
+            z-index: 60
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin: 0
+        }
+
+        .sf {
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-weight: 600
+        }
+
+        button,
+        a {
+            font: inherit;
+            color: inherit
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--go);
+            outline-offset: 3px
+        }
+
+        header {
+            position: fixed;
+            top: env(safe-area-inset-top, 0px);
+            left: 0;
+            right: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px clamp(16px, 4vw, 48px);
+            mix-blend-mode: normal
+        }
+
+        header.s {
+            background: rgba(245, 240, 231, .92);
+            backdrop-filter: blur(8px)
+        }
+
+        .logo {
+            font-weight: 900;
+            letter-spacing: .08em;
+            text-decoration: none;
+            font-size: .95rem
+        }
+
+        nav {
+            display: flex;
+            gap: clamp(10px, 2.4vw, 30px);
+            font-size: .9rem
+        }
+
+        nav a {
+            text-decoration: none;
+            opacity: .8
+        }
+
+        nav a:hover {
+            opacity: 1;
+            color: var(--go)
+        }
+
+        .cb {
+            border: 1.5px solid currentColor;
+            background: none;
+            border-radius: 99px;
+            padding: 6px 16px;
+            cursor: pointer
+        }
+
+        @media(max-width:700px) {
+            header {
+                flex-wrap: wrap;
+                gap: 6px
+            }
+
+            nav {
+                order: 3;
+                width: 100%;
+                justify-content: space-between
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            border: 1.5px solid var(--es);
+            background: var(--es);
+            color: var(--iv);
+            border-radius: 99px;
+            padding: 13px 30px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: .25s
+        }
+
+        .btn:hover {
+            background: var(--go);
+            border-color: var(--go);
+            color: var(--es)
+        }
+
+        .btn.o {
+            background: none;
+            color: inherit;
+            border-color: currentColor
+        }
+
+        .btn.o:hover {
+            background: var(--go);
+            color: var(--es);
+            border-color: var(--go)
+        }
+
+        .hero {
+            min-height: 100svh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            text-align: center;
+            padding: 90px 20px 40px;
+            overflow: hidden
+        }
+
+        .big {
+            position: absolute;
+            top: 14%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: 900;
+            font-size: clamp(4rem, 23vw, 22rem);
+            letter-spacing: -.04em;
+            line-height: .9;
+            color: var(--es);
+            white-space: nowrap;
+            animation: rise 1.6s cubic-bezier(.2, .7, .2, 1) both
+        }
+
+        .spot {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            width: min(60vw, 520px);
+            aspect-ratio: 1;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            background: radial-gradient(circle, #fff 0, rgba(255, 255, 255, .75) 35%, rgba(233, 220, 203, 0) 70%);
+            animation: fade 2s .3s both
+        }
+
+        .hc {
+            position: relative;
+            width: min(44vw, 250px);
+            animation: float 6s ease-in-out infinite, rise 1.8s .4s cubic-bezier(.2, .7, .2, 1) both;
+            filter: drop-shadow(0 30px 30px rgba(36, 23, 15, .3))
+        }
+
+        .hero h1 {
+            font-size: clamp(1.1rem, 2.6vw, 1.6rem);
+            letter-spacing: .2em;
+            font-weight: 500;
+            margin-top: 22px;
+            animation: fade 2s .9s both
+        }
+
+        .hero p {
+            opacity: .7;
+            margin: 4px 0 22px;
+            animation: fade 2s 1.1s both
+        }
+
+        .hero .btn {
+            animation: fade 2s 1.3s both
+        }
+
+        @keyframes rise {
+            from {
+                opacity: 0;
+                transform: translate(-50%, 40px)
+            }
+        }
+
+        @keyframes fade {
+            from {
+                opacity: 0
+            }
+        }
+
+        .hc {
+            --x: 0
+        }
+
+        @keyframes float {
+            50% {
+                transform: translateY(-16px)
+            }
+        }
+
+        .fl {
+            transform-origin: 100px 95px;
+            animation: fk 2.2s ease-in-out infinite alternate
+        }
+
+        @keyframes fk {
+            to {
+                transform: scale(.93, 1.08) rotate(2deg)
+            }
+        }
+
+        .hero .hc {
+            animation: float 6s ease-in-out infinite, fade 2s .4s both
+        }
+
+        .show {
+            height: 280vh;
+            position: relative
+        }
+
+        .stage {
+            --p: 0;
+            position: sticky;
+            top: 0;
+            height: 100svh;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            background: color-mix(in srgb, #24170F calc(var(--p)*100%), #F5F0E7);
+            color: color-mix(in srgb, #F5F0E7 calc(var(--p)*100%), #24170F)
+        }
+
+        .stage .c {
+            width: min(50vw, 300px);
+            transform: scale(calc(.7 + var(--p)*1.1)) rotateY(calc(var(--p)*50deg - 25deg));
+            filter: drop-shadow(0 calc(10px + var(--p)*50px) calc(20px + var(--p)*40px) rgba(0, 0, 0, calc(.15 + var(--p)*.5)))
+        }
+
+        .stage .glow {
+            position: absolute;
+            width: 80vmin;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(181, 138, 69, .55), transparent 65%);
+            opacity: calc((var(--p) - .3)*1.6)
+        }
+
+        .stage .t {
+            position: absolute;
+            bottom: 9%;
+            text-align: center;
+            font-size: clamp(2rem, 6vw, 4.4rem);
+            line-height: 1.05;
+            opacity: calc((var(--p) - .45)*4);
+            transform: translateY(calc((1 - var(--p))*40px));
+            padding: 0 20px
+        }
+
+        .stage .k {
+            position: absolute;
+            top: 16%;
+            font-size: .85rem;
+            letter-spacing: .25em;
+            opacity: calc(1 - var(--p)*4)
+        }
+
+        .coll {
+            background: var(--be);
+            padding: 96px clamp(16px, 4vw, 48px)
+        }
+
+        .hd {
+            max-width: 1200px;
+            margin: 0 auto 40px
+        }
+
+        .hd h2 {
+            font-size: clamp(2.6rem, 7vw, 5.5rem);
+            line-height: 1
+        }
+
+        .hd p {
+            margin-top: 10px;
+            opacity: .7
+        }
+
+        .cl {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 40px;
+            align-items: start
+        }
+
+        .pv {
+            position: sticky;
+            top: 90px;
+            aspect-ratio: 1;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: radial-gradient(circle, #fff, rgba(255, 255, 255, 0) 68%)
+        }
+
+        .pv svg {
+            width: 62%;
+            transition: .4s
+        }
+
+        .r {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 6px 18px;
+            align-items: center;
+            padding: 18px 0;
+            border-top: 1px solid rgba(36, 23, 15, .2);
+            cursor: pointer
+        }
+
+        .r:last-child {
+            border-bottom: 1px solid rgba(36, 23, 15, .2)
+        }
+
+        .r h3 {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            line-height: 1;
+            transition: .3s
+        }
+
+        .r:hover h3,
+        .r.on h3 {
+            color: var(--go);
+            transform: translateX(10px)
+        }
+
+        .r .th {
+            display: none;
+            width: 54px
+        }
+
+        .r small {
+            grid-column: 2;
+            opacity: .7
+        }
+
+        .r .pr {
+            font-weight: 500
+        }
+
+        .r .ac {
+            grid-column: 2/4;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        .ac button {
+            padding: 7px 16px;
+            border-radius: 99px;
+            border: 1.5px solid var(--es);
+            background: none;
+            cursor: pointer;
+            font-size: .85rem
+        }
+
+        .ac button:hover,
+        .ac .a {
+            background: var(--es);
+            color: var(--iv)
+        }
+
+        @media(max-width:760px) {
+            .cl {
+                grid-template-columns: 1fr
+            }
+
+            .pv {
+                display: none
+            }
+
+            .r {
+                grid-template-columns: 54px 1fr auto
+            }
+
+            .r .th {
+                display: block
+            }
+
+            .r .th svg {
+                width: 100%
+            }
+
+            .r .ac {
+                grid-column: 1/4
+            }
+
+            .r small {
+                grid-column: 2/4
+            }
+        }
+
+        .nt {
+            padding: 96px clamp(16px, 4vw, 48px);
+            max-width: 1200px;
+            margin: 0 auto
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 36px
+        }
+
+        .chips button {
+            border: 1.5px solid var(--es);
+            background: none;
+            border-radius: 99px;
+            padding: 6px 16px;
+            cursor: pointer
+        }
+
+        .chips button[aria-pressed=true] {
+            background: var(--es);
+            color: var(--iv)
+        }
+
+        .np {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center
+        }
+
+        @media(max-width:760px) {
+            .np {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .bot {
+            width: min(100%, 380px);
+            margin: auto;
+            animation: spin 40s linear infinite
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .words {
+            font-size: clamp(2.6rem, 7vw, 5rem);
+            line-height: 1
+        }
+
+        .words span {
+            display: block
+        }
+
+        .words span:nth-child(2) {
+            color: var(--go)
+        }
+
+        .ns {
+            margin-top: 22px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap
+        }
+
+        .ns b {
+            font-weight: 500;
+            border: 1px solid var(--go);
+            color: var(--go);
+            border-radius: 99px;
+            padding: 4px 14px
+        }
+
+        .story {
+            background: var(--es);
+            color: var(--iv);
+            padding: 140px clamp(16px, 4vw, 48px);
+            position: relative;
+            overflow: hidden;
+            text-align: center
+        }
+
+        .story h2 {
+            font-size: clamp(3rem, 9vw, 8rem);
+            line-height: .95;
+            position: relative
+        }
+
+        .story p {
+            max-width: 56ch;
+            margin: 28px auto 0;
+            font-size: 1.15rem;
+            opacity: .8;
+            position: relative
+        }
+
+        .em {
+            position: absolute;
+            bottom: -10px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--go);
+            animation: up linear infinite;
+            opacity: 0
+        }
+
+        @keyframes up {
+            10% {
+                opacity: .9
+            }
+
+            to {
+                transform: translateY(-70vh);
+                opacity: 0
+            }
+        }
+
+        .end {
+            padding: 110px clamp(16px, 4vw, 48px) 40px;
+            text-align: center
+        }
+
+        .end h2 {
+            font-size: clamp(2.8rem, 8vw, 6.5rem);
+            line-height: 1
+        }
+
+        .bt {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin: 32px 0 56px
+        }
+
+        .ft {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 16px;
+            border-top: 1px solid rgba(36, 23, 15, .2);
+            padding-top: 24px;
+            font-size: .9rem;
+            text-align: left
+        }
+
+        .ft a {
+            text-decoration: none;
+            margin-right: 16px
+        }
+
+        .rv {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s, transform 1s
+        }
+
+        .rv.in {
+            opacity: 1;
+            transform: none
+        }
+
+        .sh {
+            position: fixed;
+            inset: 0;
+            background: rgba(36, 23, 15, .55);
+            z-index: 70;
+            opacity: 0;
+            pointer-events: none;
+            transition: .3s
+        }
+
+        .sh.o {
+            opacity: 1;
+            pointer-events: auto
+        }
+
+        .dr {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: min(420px, 100%);
+            background: var(--iv);
+            z-index: 80;
+            transform: translateX(105%);
+            transition: transform .4s cubic-bezier(.2, .7, .2, 1);
+            padding: calc(18px + env(safe-area-inset-top, 0px)) 20px calc(18px + env(safe-area-inset-bottom, 0px));
+            overflow: auto
+        }
+
+        .dr.o {
+            transform: none
+        }
+
+        .dh {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .x {
+            border: 0;
+            background: var(--be);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.3rem
+        }
+
+        .ln {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--be)
+        }
+
+        .ln svg {
+            width: 50px;
+            flex: none;
+            background: var(--be);
+            border-radius: 10px
+        }
+
+        .ln>div {
+            flex: 1
+        }
+
+        .q {
+            display: inline-flex;
+            align-items: center;
+            border: 1.5px solid var(--be);
+            border-radius: 99px
+        }
+
+        .q button {
+            width: 34px;
+            height: 34px;
+            border: 0;
+            background: none;
+            font-size: 1.1rem;
+            cursor: pointer
+        }
+
+        .q span {
+            min-width: 26px;
+            text-align: center
+        }
+
+        .tt {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.25rem;
+            margin: 16px 0
+        }
+
+        .lk {
+            background: none;
+            border: 0;
+            text-decoration: underline;
+            cursor: pointer;
+            padding: 0;
+            font-size: .85rem
+        }
+
+        label {
+            display: block;
+            margin: 12px 0 4px;
+            font-weight: 500
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            background: #fff;
+            border: 1.5px solid var(--be);
+            border-radius: 12px;
+            padding: 11px 14px;
+            font: inherit
+        }
+
+        .pd {
+            position: fixed;
+            inset: 0;
+            z-index: 65;
+            background: var(--be);
+            transform: translateY(100%);
+            transition: transform .6s cubic-bezier(.2, .7, .2, 1);
+            overflow: auto;
+            padding: calc(20px + env(safe-area-inset-top, 0px)) clamp(16px, 4vw, 48px) 40px
+        }
+
+        .pd.o {
+            transform: none
+        }
+
+        .pg {
+            max-width: 1100px;
+            margin: 30px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center
+        }
+
+        @media(max-width:760px) {
+            .pg {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .pg .im {
+            display: grid;
+            place-items: center;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle, #fff, rgba(255, 255, 255, 0) 68%)
+        }
+
+        .pg .im svg {
+            width: 62%
+        }
+
+        .pg h2 {
+            font-size: clamp(3rem, 9vw, 6rem);
+            line-height: .95
+        }
+
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+            transform: translate(-50%, 30px);
+            background: var(--es);
+            color: var(--iv);
+            padding: 10px 22px;
+            border-radius: 99px;
+            opacity: 0;
+            transition: .3s;
+            z-index: 90;
+            pointer-events: none
+        }
+
+        .toast.s {
+            opacity: 1;
+            transform: translate(-50%, 0)
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            * {
+                animation: none !important;
+                transition: none !important
+            }
+
+            html {
+                scroll-behavior: auto
+            }
+
+            .rv {
+                opacity: 1;
+                transform: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header id="hd"><a class="logo" href="#home">LUMORA CANDLES</a>
+        <nav aria-label="Main"><a href="#home">Home</a><a href="#fragrances">Fragrances</a><a href="#story">Our
+                Story</a><a href="#contact">Contact</a></nav><button class="cb" id="oc" aria-label="Open cart">Cart
+            (<span id="n">0</span>)</button>
+    </header>
+    <main>
+        <section class="hero" id="home">
+            <div class="big" aria-hidden="true">LUMORA</div>
+            <div class="spot"></div>
+            <div class="hc" id="hc"></div>
+            <h1>LIGHT UP YOUR MOMENTS.</h1>
+            <p>Where fragrance meets feeling.</p><a class="btn" href="#fragrances">Explore Collection</a>
+        </section>
+        <section class="show" id="show">
+            <div class="stage" id="stage">
+                <div class="k">SCROLL</div>
+                <div class="glow"></div>
+                <div class="c" id="sc"></div>
+                <h2 class="t sf">More than a candle.<br>An atmosphere.</h2>
+            </div>
+        </section>
+        <section class="coll" id="fragrances">
+            <div class="hd rv">
+                <h2 class="sf">Find Your Fragrance.</h2>
+                <p>Every scent tells a different story.</p>
+            </div>
+            <div class="cl">
+                <div id="list"></div>
+                <div class="pv" id="pv"></div>
+            </div>
+        </section>
+        <section class="nt" id="notes">
+            <div class="hd rv" style="padding:0">
+                <h2 class="sf">Inside Every Fragrance.</h2>
+            </div>
+            <div class="chips" id="chips"></div>
+            <div class="np">
+                <div id="bot"></div>
+                <div>
+                    <div class="words sf" id="words"></div>
+                    <div class="ns" id="ns"></div>
+                </div>
+            </div>
+        </section>
+        <section class="story" id="story">
+            <div id="embers"></div>
+            <h2 class="sf rv">Small Flames.<br>Beautiful Memories.</h2>
+            <p class="rv">At Lumora Candles, we believe that fragrance has the power to transform ordinary moments into
+                beautiful memories. Every candle is an invitation to slow down, unwind and enjoy the little things in
+                life.</p>
+        </section>
+        <section class="end" id="contact">
+            <h2 class="sf rv">Make Every Moment Glow.</h2>
+            <div class="bt"><a class="btn" href="#fragrances">Explore Fragrances</a><a class="btn o" data-wa href="#"
+                    target="_blank" rel="noopener">Order on WhatsApp</a><a class="btn o" id="ig" href="#"
+                    target="_blank" rel="noopener">Follow on Instagram</a></div>
+            <div class="ft">
+                <div><b>LUMORA CANDLES</b><br>WhatsApp: +91 74115 75070<br>Instagram: @lumoracandles14</div>
+                <div><a href="#home">Home</a><a href="#fragrances">Fragrances</a><a href="#story">Our Story</a><a
+                        href="#contact">Contact</a></div>
+                <div>© 2026 Lumora Candles</div>
+            </div>
+        </section>
+    </main>
+    <div class="sh" id="sh"></div>
+    <aside class="dr" id="dr" aria-label="Shopping cart" aria-hidden="true"></aside>
+    <div class="pd" id="pd" aria-hidden="true"></div>
+    <div class="toast" id="toast" role="status"></div>
+    <script>
+        // ===== EDIT HERE: WhatsApp number, Instagram, and products [name, price, colour, descriptors, notes, description] =====
+        var WA = "917411575070", INSTA = "https://www.instagram.com/lumoracandles14/";
+        var P = [
+            ["Sandalwood", 350, "#B98A5E", "Woody, Warm, Earthy", "Sandalwood, Cedar, Amber", "Creamy wood that wraps a room in warmth."],
+            ["Rose", 350, "#E3A3B0", "Floral, Romantic, Delicate", "Rose petal, Peony, Musk", "Fresh-cut petals with a soft, romantic glow."],
+            ["Vanilla", 260, "#F1DDB0", "Sweet, Creamy, Comforting", "Vanilla bean, Cream, Tonka", "Smooth vanilla, like something baking nearby."],
+            ["Lemon Grass", 400, "#C3D178", "Green, Bright, Uplifting", "Lemon grass, Mint, Ginger", "A clean, herbal lift for open mornings."],
+            ["Eucalyptus", 400, "#9CC1AE", "Cool, Clean, Airy", "Eucalyptus, Spearmint, Pine", "Spa-like air that helps you breathe easy."],
+            ["Jasmine", 350, "#F3E6BF", "Floral, Heady, Elegant", "Jasmine, Neroli, White musk", "Night-blooming jasmine, sweet and graceful."],
+            ["Chocolate", 450, "#7A4630", "Rich, Decadent, Cosy", "Dark cocoa, Praline, Vanilla", "Deep cocoa that feels like a warm dessert."],
+            ["Lemon", 260, "#F4DE6A", "Zesty, Sunny, Fresh", "Lemon peel, Verbena, Citrus", "Bright citrus to wake up any corner."],
+            ["Coffee", 350, "#8F6444", "Rich, Roasted, Warm", "Espresso, Caramel, Cocoa", "Freshly ground roast with a hint of caramel."],
+            ["Lavender", 400, "#BAA6D8", "Floral, Fresh, Relaxing", "Lavender, Sage, Soft musk", "Calm fields of lavender for slow evenings."],
+            ["Cinnamon", 350, "#C77C4E", "Spiced, Cosy, Festive", "Cinnamon bark, Clove, Orange", "Warm spice for every cosy season."],
+            ["Strawberry", 300, "#E58593", "Juicy, Sweet, Playful", "Strawberry, Cream, Vanilla", "Ripe berries with a soft cream finish."],
+            ["Blueberry", 400, "#7D8CC2", "Tangy, Sweet, Fruity", "Blueberry, Blackcurrant, Musk", "Sun-warmed berries, tangy and sweet."]
+        ].map(function (a) { return { id: a[0].toLowerCase().replace(/ /g, "-"), name: a[0], price: a[1], color: a[2], tags: a[3], notes: a[4], desc: a[5] } });
+        // ===========================================================================================================
+        var $ = function (s) { return document.querySelector(s) }, cart = {};
+        try { cart = JSON.parse(localStorage.getItem("lumora-cart") || "{}") || {} } catch (e) { }
+        function find(i) { return P.filter(function (p) { return p.id === i })[0] } function rs(n) { return "₹" + n.toLocaleString("en-IN") }
+        function sv() { try { localStorage.setItem("lumora-cart", JSON.stringify(cart)) } catch (e) { } }
+        function wa(t) { return "https://wa.me/" + WA + (t ? "?text=" + encodeURIComponent(t) : "") }
+        function candle(p) { var c = p.color; return '<svg viewBox="0 0 200 260" role="img" aria-label="' + p.name + ' candle"><ellipse cx="100" cy="246" rx="66" ry="8" fill="#000" opacity=".2"/><circle cx="100" cy="70" r="48" fill="#B58A45" opacity=".16"/><rect x="38" y="100" width="124" height="140" rx="20" fill="#fff" opacity=".3"/><rect x="44" y="124" width="112" height="110" rx="14" fill="' + c + '"/><ellipse cx="100" cy="126" rx="56" ry="8" fill="#fff" opacity=".4"/><rect x="98" y="102" width="4" height="26" rx="2" fill="#24170F"/><g class="fl"><path d="M100 52c13 17 16 28 7 41-5 6-10 6-14 0-9-13-4-24 7-41z" fill="#E8B75A"/><path d="M100 70c6 8 7 14 3 19-2 3-6 3-6 0-3-5-1-11 3-19z" fill="#FFF8E8"/></g><rect x="52" y="108" width="7" height="118" rx="3.5" fill="#fff" opacity=".45"/><rect x="38" y="100" width="124" height="140" rx="20" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="2.5"/></svg>' }
+        function toast(m) { var t = $("#toast"); t.textContent = m; t.classList.add("s"); clearTimeout(toast.t); toast.t = setTimeout(function () { t.classList.remove("s") }, 1800) }
+        function add(i, q) { cart[i] = (cart[i] || 0) + (q || 1); sv(); upd(); toast(find(i).name + " added to cart") }
+        function tot() { var t = 0; for (var k in cart) t += cart[k] * find(k).price; return t }
+        function upd() { var n = 0; for (var k in cart) n += cart[k]; $("#n").textContent = n; if ($("#dr").classList.contains("o") && !upd.co) cd() }
+        // hero & showcase
+        $("#hc").innerHTML = candle(find("sandalwood")); $("#sc").innerHTML = candle(find("vanilla")); $("#pv").innerHTML = candle(P[0]);
+        // list
+        $("#list").innerHTML = P.map(function (p) { return '<div class="r" data-id="' + p.id + '" tabindex="0"><span class="th">' + candle(p) + '</span><h3 class="sf">' + p.name + '</h3><span class="pr">' + rs(p.price) + '</span><small>' + p.desc + '</small><div class="ac"><button data-v="' + p.id + '">View Details</button><button class="a" data-a="' + p.id + '">Add to Cart</button></div></div>' }).join("");
+        function prev(e) { var r = e.target.closest(".r"); if (!r) return; document.querySelectorAll(".r.on").forEach(function (x) { x.classList.remove("on") }); r.classList.add("on"); $("#pv").innerHTML = candle(find(r.dataset.id)) }
+        $("#list").onmouseover = prev; $("#list").onfocusin = prev; $("#list").addEventListener("touchstart", prev, { passive: true });
+        // notes
+        function petals(p) { var s = '<svg class="bot" viewBox="-100 -100 200 200" role="img" aria-label="' + p.name + ' ingredients">'; for (var i = 0; i < 8; i++)s += '<ellipse cx="0" cy="-48" rx="16" ry="38" fill="' + p.color + '" opacity=".75" transform="rotate(' + i * 45 + ')"/>'; return s + '<circle r="22" fill="#B58A45"/><circle r="8" fill="#F5F0E7"/></svg>' }
+        function note(id) { var p = find(id); $("#bot").innerHTML = petals(p); $("#words").innerHTML = p.tags.split(", ").map(function (w) { return "<span>" + w + "</span>" }).join(""); $("#ns").innerHTML = p.notes.split(", ").map(function (w) { return "<b>" + w + "</b>" }).join(""); document.querySelectorAll("#chips button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.n === id) }) }
+        $("#chips").innerHTML = P.map(function (p) { return '<button data-n="' + p.id + '">' + p.name + '</button>' }).join(""); $("#chips").onclick = function (e) { if (e.target.dataset.n) note(e.target.dataset.n) }; note("rose");
+        // embers
+        $("#embers").innerHTML = Array.apply(0, Array(24)).map(function (_, i) { return '<i class="em" style="left:' + (i * 4.3 + 2) + '%;animation-duration:' + (6 + i % 7) + 's;animation-delay:' + (i % 9) + 's"></i>' }).join("");
+        // product overlay
+        function openP(id) {
+            var p = find(id); if (!p) return; var q = 1, d = $("#pd"); d.innerHTML = '<div class="dh"><b>LUMORA CANDLES</b><button class="x" id="px" aria-label="Close">×</button></div><div class="pg"><div class="im">' + candle(p) + '</div><div><p>' + p.tags + '</p><h2 class="sf">' + p.name + '</h2><p style="font-size:1.6rem;margin:10px 0;color:#B58A45">' + rs(p.price) + '</p><p>' + p.desc + '</p><p style="margin-top:14px"><b>Notes:</b> ' + p.notes + '</p><div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:24px"><div class="q"><button id="qm" aria-label="Decrease">−</button><span id="qv">1</span><button id="qp" aria-label="Increase">+</button></div><button class="btn" id="qa">Add to Cart</button><a class="btn o" id="qw" href="#" target="_blank" rel="noopener">Order on WhatsApp</a></div></div></div>';
+            function w() { $("#qw").href = wa("Hello Lumora Candles! I’d like to order " + q + " × " + p.name + " (" + rs(q * p.price) + "). Please confirm availability.") } w();
+            $("#qm").onclick = function () { q = Math.max(1, q - 1); $("#qv").textContent = q; w() }; $("#qp").onclick = function () { q++; $("#qv").textContent = q; w() }; $("#qa").onclick = function () { add(p.id, q) }; $("#px").onclick = function () { location.hash = "fragrances" };
+            d.classList.add("o"); d.setAttribute("aria-hidden", "false"); d.scrollTop = 0; document.body.style.overflow = "hidden"
+        }
+        function closeP() { $("#pd").classList.remove("o"); $("#pd").setAttribute("aria-hidden", "true"); document.body.style.overflow = "" }
+        function hs() { var h = location.hash.slice(1); if (h.indexOf("p-") === 0) openP(h.slice(2)); else closeP() }
+        // cart drawer
+        function od(o) { upd.co = false; $("#dr").classList.toggle("o", o); $("#sh").classList.toggle("o", o); $("#dr").setAttribute("aria-hidden", !o); if (o) cd() }
+        function cd(co) {
+            upd.co = !!co; var ids = Object.keys(cart).filter(function (k) { return cart[k] > 0 && find(k) }), d = $("#dr"), h = '<div class="dh"><h2 class="sf" style="font-size:2rem">' + (co ? "Checkout" : "Your cart") + '</h2><button class="x" id="cx" aria-label="Close cart">×</button></div>';
+            if (!ids.length) { d.innerHTML = h + '<p style="margin:40px 0">Your cart is empty.</p><a class="btn" href="#fragrances" id="cs">Explore Fragrances</a>'; $("#cx").onclick = function () { od(false) }; $("#cs").onclick = function () { od(false) }; return }
+            var L = ids.map(function (k) { var p = find(k); return '<div class="ln">' + candle(p) + '<div><b>' + p.name + '</b><br>' + (co ? cart[k] + " × " + rs(p.price) : '<div class="q"><button data-d="' + k + '" aria-label="Decrease ' + p.name + '">−</button><span>' + cart[k] + '</span><button data-i="' + k + '" aria-label="Increase ' + p.name + '">+</button></div>') + '</div><div style="text-align:right">' + rs(cart[k] * p.price) + (co ? "" : '<br><button class="lk" data-r="' + k + '">Remove</button>') + '</div></div>' }).join(""), T = '<div class="tt"><span>Total</span><b>' + rs(tot()) + '</b></div>';
+            if (co) {
+                d.innerHTML = h + L + T + '<form id="cf"><label for="n1">Name</label><input id="n1" required autocomplete="name"><label for="n2">Phone number</label><input id="n2" type="tel" required autocomplete="tel"><label for="n3">Delivery address</label><textarea id="n3" rows="3" required autocomplete="street-address"></textarea><div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap"><button class="btn" type="submit">Send order on WhatsApp</button><button class="btn o" type="button" id="bk">Back</button></div><p style="font-size:.85rem;opacity:.7;margin-top:10px">We’ll confirm delivery and payment with you on WhatsApp.</p></form>';
+                $("#bk").onclick = function () { cd() }; $("#cf").onsubmit = function (e) { e.preventDefault(); var m = "Hello Lumora Candles! I’d like to place an order:\n\n" + ids.map(function (k) { var p = find(k); return "• " + p.name + " × " + cart[k] + " = " + rs(cart[k] * p.price) }).join("\n") + "\n\nTotal: " + rs(tot()) + "\n\nName: " + $("#n1").value + "\nPhone: " + $("#n2").value + "\nAddress: " + $("#n3").value + "\n\nPlease confirm availability and payment details. Thank you!"; window.open(wa(m), "_blank") }
+            }
+            else { d.innerHTML = h + L + T + '<div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="po">Place Order</button><button class="btn o" id="cs">Continue Shopping</button></div>'; $("#po").onclick = function () { cd(true) }; $("#cs").onclick = function () { od(false) } }
+            $("#cx").onclick = function () { od(false) }
+        }
+        document.addEventListener("click", function (e) {
+            var t = e.target, a;
+            if (a = t.closest("[data-a]")) add(a.dataset.a); else if (a = t.closest("[data-v]")) location.hash = "p-" + a.dataset.v;
+            else if (a = t.closest("[data-i]")) { cart[a.dataset.i]++; sv(); upd() } else if (a = t.closest("[data-d]")) { var k = a.dataset.d; if (--cart[k] < 1) delete cart[k]; sv(); upd() } else if (a = t.closest("[data-r]")) { delete cart[a.dataset.r]; sv(); upd() }
+        });
+        $("#oc").onclick = function () { od(true) }; $("#sh").onclick = function () { od(false) }; document.addEventListener("keydown", function (e) { if (e.key === "Escape") { od(false); if ($("#pd").classList.contains("o")) location.hash = "fragrances" } });
+        // scroll effects
+        var sh = $("#show"), st = $("#stage"), hd = $("#hd"); function sc() { var r = sh.getBoundingClientRect(), p = Math.min(1, Math.max(0, -r.top / (r.height - innerHeight))); st.style.setProperty("--p", p.toFixed(3)); hd.classList.toggle("s", scrollY > 40 && (p < .05 || p > .98 || r.bottom < 0 || r.top > 0)); hd.style.color = (p > .35 && r.top <= 0 && r.bottom > innerHeight * .5) ? "#F5F0E7" : ""; if (hd.style.color) hd.classList.remove("s") }
+        addEventListener("scroll", sc, { passive: true }); sc();
+        if ("IntersectionObserver" in window) { var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target) } }) }, { threshold: .15 }); document.querySelectorAll(".rv").forEach(function (x) { io.observe(x) }) } else document.querySelectorAll(".rv").forEach(function (x) { x.classList.add("in") });
+        document.querySelectorAll("[data-wa]").forEach(function (a) { a.href = wa("Hi Lumora Candles!") }); $("#ig").href = INSTA;
+        addEventListener("hashchange", hs); hs(); upd();
+    </script>
+</body>
+
+</html>
